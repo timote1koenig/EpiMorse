@@ -8,8 +8,7 @@ Description: This is the main who managed EpiMorse
 """
 
 import sys
-import random
-from PyQt6.QtWidgets import QApplication, QMainWindow
+from PyQt6.QtWidgets import QApplication
 from object.Window import Window
 
 if __name__ == "__main__":
