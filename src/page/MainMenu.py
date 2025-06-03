@@ -10,7 +10,7 @@ Description: This is the MainMenu class
 from PyQt6.QtWidgets import QApplication, QLabel, QVBoxLayout, QHBoxLayout, QWidget
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFontDatabase, QFont
-from component.Form import Form
+from src.component.Form import Form
 
 class MainMenu(QWidget):
 
@@ -19,27 +19,10 @@ class MainMenu(QWidget):
         form = Form()
         second_form = Form()
 
-        title = QLabel("EpiMorse")
-        title.setStyleSheet("font-size: 30px;")
 
-        main_layout = QVBoxLayout()
-        top_row = QHBoxLayout()
-        middle_row = QHBoxLayout()
-        down_row = QHBoxLayout()
+        main_layout = QHBoxLayout()
 
-        top_row.addStretch()
-        top_row.addWidget(title)
-        top_row.addStretch()
-
-        middle_row.addWidget(form)
-
-        down_row.addWidget(second_form)
-
-        main_layout.addLayout(top_row)
-        main_layout.addStretch()
-        main_layout.addLayout(middle_row)
-        main_layout.addStretch()
-        main_layout.addLayout(down_row)
-        main_layout.addStretch()
+        main_layout.addWidget(form)
+        main_layout.addWidget(second_form)
 
         self.setLayout(main_layout)

@@ -14,8 +14,15 @@ class Form(QWidget):
         super().__init__(parent)
 
         self.edit = QLineEdit()
+
+        self.edit.setMinimumHeight(150)
+        self.edit.setMinimumWidth(150)
+        self.edit.setMaximumHeight(800)
+        self.edit.setMaximumWidth(800)
+        
         layout = QVBoxLayout()
         layout.addWidget(self.edit)
+
         self.setLayout(layout)
 
     def getValue(self):

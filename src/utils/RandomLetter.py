@@ -10,13 +10,10 @@ Description: This is the random function used to learn morse
 import random
 import string
 
-# Poids initiaux
 weights = {l: 1.0 for l in string.ascii_uppercase}
 
-# Nombre de tirages déjà effectués par lettre
 compteur = {l: 0 for l in string.ascii_uppercase}
 
-# Dépendances : B ne peut apparaître que si A a été tiré au moins 3 fois, etc.
 conditions = {
     'Z': {'Q': 2, 'Y': 2},
     'Q': {'C': 2, 'J': 2},
