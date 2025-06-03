@@ -8,13 +8,29 @@ Description: This is the main who managed EpiMorse
 """
 
 import sys
-from PyQt6.QtWidgets import QApplication
-from object.Window import Window
+from PyQt6.QtWidgets import QApplication, QLabel, QVBoxLayout, QHBoxLayout, QWidget
+from PyQt6.QtCore import Qt
+from src.Window import Window
+from src.page.MainMenu import MainMenu
+from src.Header import Header
+
+def Menu():
+    app = QApplication([])
+
+    window = Window()
+
+    header = Header()
+
+    page = MainMenu()
+
+
+    window.setCentralWidget(container)
+
+    window.show()
+    app.exec()
+    return 0
+
 
 if __name__ == "__main__":
-    app = QApplication([])
-    
-    window = Window()
-    window.show()
+    sys.exit(Menu())
 
-    app.exec()  

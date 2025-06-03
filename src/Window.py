@@ -14,4 +14,5 @@ class Window(QMainWindow):
         super().__init__()
         self.setWindowTitle("Window from another file")
         self.resize(1920, 1080)
+        self.setMinimumSize(800, 600)
         
