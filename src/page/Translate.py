@@ -20,46 +20,55 @@ class Translate(QWidget):
         page = QHBoxLayout()
 
         leftSection = QVBoxLayout()
-
         self.srcForm = Form()
-
         leftSection.addLayout(Title("Écrire ici"))
         leftSection.addWidget(self.srcForm)
 
         rightSection = QVBoxLayout()
-
         self.destForm = Form()
-
         rightSection.addLayout(Title("Résultat ici"))
         rightSection.addWidget(self.destForm)
 
         page.addLayout(leftSection)
         page.addLayout(rightSection)
-
         self.setLayout(page)
 
-        self.srcForm.edit.textChanged.connect(self.sync_forms)
+        self.srcForm.edit.textChanged.connect(self.src_changed)
+        self.destForm.edit.textChanged.connect(self.dest_changed)
 
-    
-    def sync_forms(self):
-        self.destForm.setValue(translate(self.srcForm.getValue()))
+        self.updating = False
+
+    def src_changed(self):
+        if self.updating:
+            return
+        self.updating = True
+        self.destForm.setValue(toLetter(self.srcForm.getValue()))
+        self.updating = False
+
+    def dest_changed(self):
+        if self.updating:
+            return
+        self.updating = True
+        self.srcForm.setValue(toMorse(self.destForm.getValue()))
+        self.updating = False
 
 def is_morse(s):
     allowed = {'.', '-', ' '}
     return all(c in allowed for c in s.strip()) and any(c in '.-' for c in s)
 
 
-def translate(text):
-    if (is_morse(text)):
-        text = text.strip().replace("  ", " / ")
-        symbols = text.split()
+def toMorse(text):
+    text = text.strip().replace("  ", " / ")
+    symbols = text.split()
 
-        result = []
-        for symbol in symbols:
-            if symbol == '/':
-                result.append(' ')
-            else:
-                result.append(fromMorse.get(symbol, ''))  # Ignore unknown
-        return ''.join(result)
-    else:
-        return ''.join(fromLetter.get(char, '') for char in text)
+    result = []
+    for symbol in symbols:
+        if symbol == '/':
+            result.append(' ')
+        else:
+            result.append(fromMorse.get(symbol, ''))  # Ignore unknown
+    return ''.join(result)
+
+def toLetter(text):
+    return ''.join(fromLetter.get(char, '') for char in text)
+
