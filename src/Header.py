@@ -15,25 +15,45 @@ class Header(QWidget):
     def __init__(self):
         super().__init__()
 
-        content = QVBoxLayout()
-        titleSection = QHBoxLayout()
-        navigation = QHBoxLayout()
+        wrapper = QVBoxLayout()
+        self.setLayout(wrapper)
+        
+        coloredArea = QWidget()
+        wrapper.addWidget(coloredArea)
 
+        content = QVBoxLayout()
+        coloredArea.setLayout(content)
+
+
+        titleSection = QHBoxLayout()
         content.addLayout(titleSection)
-        content.addLayout(navigation)
 
         title = QLabel("EpiMorse")
+
+        title.setStyleSheet("color: White")
 
         titleSection.addStretch()
         titleSection.addWidget(title)
         titleSection.addStretch()
+        
 
-        button1 = QPushButton()
-        button2 = QPushButton()
-        button3 = QPushButton()
+        navigation = QHBoxLayout()
+        content.addLayout(navigation)
+
+        button1 = QPushButton("Traduction")
+        button2 = QPushButton("Apprendre")
+        button3 = QPushButton("Dictionnaire")
+
+        button1.setStyleSheet("background-color: PowderBlue")
+        button2.setStyleSheet("background-color: PowderBlue")
+        button3.setStyleSheet("background-color: PowderBlue")
 
         navigation.addWidget(button1)
         navigation.addWidget(button2)
         navigation.addWidget(button3)
 
-        self.setLayout(content)
+
+        coloredArea.setStyleSheet("background-color: DarkBlue;")
+
+        wrapper.setContentsMargins(0, 0, 0, 0)
+

@@ -7,21 +7,21 @@ Version: 1.0
 Description: This is the Form class
 """
 
-from PyQt6.QtWidgets import QLineEdit, QVBoxLayout, QWidget
+from PyQt6.QtWidgets import QTextEdit, QVBoxLayout, QWidget, QSizePolicy
+from PyQt6.QtGui import QTextCursor
+
 
 class Form(QWidget):
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self):
+        super().__init__()
 
-        self.edit = QLineEdit()
+        self.edit = QTextEdit()
+        self.edit.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-        self.edit.setMinimumHeight(150)
-        self.edit.setMinimumWidth(150)
-        self.edit.setMaximumHeight(800)
-        self.edit.setMaximumWidth(800)
-        
         layout = QVBoxLayout()
         layout.addWidget(self.edit)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
 
         self.setLayout(layout)
 

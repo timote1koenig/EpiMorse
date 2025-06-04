@@ -32,7 +32,9 @@ def Menu():
     layout.addWidget(header, 0, 0, 1, 2)
     layout.addWidget(main, 1, 0)
 
-    layout.setRowStretch(1, 1)     # Row containing menu and content
+    layout.setRowStretch(1, 1)
+
+    layout.setContentsMargins(0, 0, 0, 0)
 
     window.show()
     app.exec()
