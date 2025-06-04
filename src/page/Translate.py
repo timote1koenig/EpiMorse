@@ -7,39 +7,59 @@ Version: 1.0
 Description: This is the Translate Page
 """
 
-from PyQt6.QtWidgets import QApplication, QLabel, QVBoxLayout, QHBoxLayout, QWidget
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFontDatabase, QFont
-from component.Form import Form
+from PyQt6.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget
+from src.component.Form import Form
+from src.component.Title import Title
+from src.page.Dictionnary import fromMorse, fromLetter
 
-class MainMenu(QWidget):
+class Translate(QWidget):
 
     def __init__(self):
         super().__init__()
-        form = Form()
-        second_form = Form()
 
-        title = QLabel("EpiMorse")
-        title.setStyleSheet("font-size: 30px;")
+        page = QHBoxLayout()
 
-        main_layout = QVBoxLayout()
-        top_row = QHBoxLayout()
-        middle_row = QHBoxLayout()
-        down_row = QHBoxLayout()
+        leftSection = QVBoxLayout()
 
-        top_row.addStretch()
-        top_row.addWidget(title)
-        top_row.addStretch()
+        self.srcForm = Form()
 
-        middle_row.addWidget(form)
+        leftSection.addLayout(Title("Écrire ici"))
+        leftSection.addWidget(self.srcForm)
 
-        down_row.addWidget(second_form)
+        rightSection = QVBoxLayout()
 
-        main_layout.addLayout(top_row)
-        main_layout.addStretch()
-        main_layout.addLayout(middle_row)
-        main_layout.addStretch()
-        main_layout.addLayout(down_row)
-        main_layout.addStretch()
+        self.destForm = Form()
 
-        self.setLayout(main_layout)
+        rightSection.addLayout(Title("Résultat ici"))
+        rightSection.addWidget(self.destForm)
+
+        page.addLayout(leftSection)
+        page.addLayout(rightSection)
+
+        self.setLayout(page)
+
+        self.srcForm.edit.textChanged.connect(self.sync_forms)
+
+    
+    def sync_forms(self):
+        self.destForm.setValue(translate(self.srcForm.getValue()))
+
+def is_morse(s):
+    allowed = {'.', '-', ' '}
+    return all(c in allowed for c in s.strip()) and any(c in '.-' for c in s)
+
+
+def translate(text):
+    if (is_morse(text)):
+        text = text.strip().replace("  ", " / ")
+        symbols = text.split()
+
+        result = []
+        for symbol in symbols:
+            if symbol == '/':
+                result.append(' ')
+            else:
+                result.append(fromMorse.get(symbol, ''))  # Ignore unknown
+        return ''.join(result)
+    else:
+        return ''.join(fromLetter.get(char, '') for char in text)

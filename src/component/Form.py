@@ -26,7 +26,7 @@ class Form(QWidget):
         self.setLayout(layout)
 
     def getValue(self):
-        return self.edit.text()
+        return self.edit.toPlainText()
 
     def setValue(self, value):
         self.edit.setText(value)

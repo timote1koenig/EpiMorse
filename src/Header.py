@@ -7,8 +7,8 @@ Version: 1.0
 Description: This is the Header class
 """
 
-from PyQt6.QtWidgets import QLabel, QVBoxLayout, QHBoxLayout, QWidget, QPushButton
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QPushButton
+from src.component.Title import Title
 
 class Header(QWidget):
 
@@ -25,16 +25,8 @@ class Header(QWidget):
         coloredArea.setLayout(content)
 
 
-        titleSection = QHBoxLayout()
+        titleSection = Title("EpiMorse", "White")
         content.addLayout(titleSection)
-
-        title = QLabel("EpiMorse")
-
-        title.setStyleSheet("color: White")
-
-        titleSection.addStretch()
-        titleSection.addWidget(title)
-        titleSection.addStretch()
         
 
         navigation = QHBoxLayout()

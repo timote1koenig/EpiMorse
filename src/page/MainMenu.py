@@ -7,22 +7,22 @@ Version: 1.0
 Description: This is the MainMenu class
 """
 
-from PyQt6.QtWidgets import QApplication, QLabel, QVBoxLayout, QHBoxLayout, QWidget
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFontDatabase, QFont
+from PyQt6.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget
 from src.component.Form import Form
 
 class MainMenu(QWidget):
 
     def __init__(self):
         super().__init__()
-        form = Form()
-        second_form = Form()
 
+        forms = QHBoxLayout()
 
-        main_layout = QHBoxLayout()
+        leftSection = QVBoxLayout
 
-        main_layout.addWidget(form)
-        main_layout.addWidget(second_form)
+        rightForm = Form()
+        leftForm = Form()
 
-        self.setLayout(main_layout)
+        forms.addWidget(rightForm)
+        forms.addWidget(leftForm)
+
+        self.setLayout(forms)

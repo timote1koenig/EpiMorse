@@ -8,10 +8,10 @@ Description: This is the main who managed EpiMorse
 """
 
 import sys
-from PyQt6.QtWidgets import QApplication, QLabel, QVBoxLayout, QGridLayout, QWidget
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QApplication, QGridLayout, QWidget
 from src.Window import Window
 from src.page.MainMenu import MainMenu
+from src.page.Translate import Translate
 from src.Header import Header
 
 def Menu():
@@ -27,7 +27,7 @@ def Menu():
 
     header = Header()
 
-    main = MainMenu()
+    main = Translate()
 
     layout.addWidget(header, 0, 0, 1, 2)
     layout.addWidget(main, 1, 0)
