@@ -21,12 +21,12 @@ class Translate(QWidget):
 
         leftSection = QVBoxLayout()
         self.srcForm = Form()
-        leftSection.addLayout(Title("Écrire ici"))
+        leftSection.addLayout(Title("Texte"))
         leftSection.addWidget(self.srcForm)
 
         rightSection = QVBoxLayout()
         self.destForm = Form()
-        rightSection.addLayout(Title("Résultat ici"))
+        rightSection.addLayout(Title("Morse"))
         rightSection.addWidget(self.destForm)
 
         page.addLayout(leftSection)
@@ -66,7 +66,7 @@ def toMorse(text):
         if symbol == '/':
             result.append(' ')
         else:
-            result.append(fromMorse.get(symbol, ''))  # Ignore unknown
+            result.append(fromMorse.get(symbol, ''))
     return ''.join(result)
 
 def toLetter(text):
