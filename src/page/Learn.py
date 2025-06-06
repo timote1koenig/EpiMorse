@@ -104,11 +104,12 @@ class learnCharacter(QWidget):
         page.addStretch()
         page.addLayout(buttonWrapper)
         page.addStretch()
+
+        self.wrong = 0
         
     def testValidity(self):
-        print(list.get(self.answer.getValue(), ''))
-        print(self.letter)
         if (list.get(self.answer.getValue(), '') == self.letter):
+            self.wrong = 0
             self.answer.setStyleSheet("background-color: GREEN;")
             self.button.setText("Next")
             self.button.clicked.disconnect()
@@ -116,7 +117,12 @@ class learnCharacter(QWidget):
             self.button.clicked.connect(self.next)
             self.answer.enterPressed.connect(self.next)
         else:
-            self.answer.setStyleSheet("background-color: RED;")
+            if self.wrong >= 2:
+                self.answer.setValue(list.get(self.letter, ''))
+                self.answer.setStyleSheet("background-color: YELLOW;")
+            else:
+                self.wrong += 1
+                self.answer.setStyleSheet("background-color: RED;")
     
     def next(self):
         self.letter = getRandomLetter()

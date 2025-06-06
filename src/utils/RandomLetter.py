@@ -43,7 +43,7 @@ conditions = {
 
 def est_debloquee(lettre, compteur, conditions):
     if lettre not in conditions:
-        return True  # Pas de condition : toujours débloquée
+        return True
     for lettre_requise, nb_min in conditions[lettre].items():
         if compteur[lettre_requise] < nb_min:
             return False
