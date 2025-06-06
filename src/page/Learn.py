@@ -11,7 +11,6 @@ from PyQt6.QtWidgets import QHBoxLayout, QWidget, QPushButton, QVBoxLayout
 from PyQt6.QtCore import Qt
 from src.component.Form import Form
 from src.component.Title import Title
-from src.utils.RandomLetter import getRandomLetter
 
 list = {
     ".-": "A",
@@ -69,10 +68,12 @@ list = {
 }
 
 class learnCharacter(QWidget):
-    def __init__(self):
+    def __init__(self, function):
         super().__init__()
 
-        self.letter = getRandomLetter()
+        self.random = function
+
+        self.letter = self.random()
 
         page = QVBoxLayout()
 
@@ -108,7 +109,8 @@ class learnCharacter(QWidget):
         self.wrong = 0
         
     def testValidity(self):
-        if (list.get(self.answer.getValue(), '') == self.letter):
+        value = list.get(self.answer.getValue().upper(), '')
+        if (value == self.letter):
             self.wrong = 0
             self.answer.setStyleSheet("background-color: GREEN;")
             self.button.setText("Next")
@@ -125,7 +127,7 @@ class learnCharacter(QWidget):
                 self.answer.setStyleSheet("background-color: RED;")
     
     def next(self):
-        self.letter = getRandomLetter()
+        self.letter = self.random()
         self.charDisplay.update(self.letter)
         self.answer.setStyleSheet("")
         self.answer.setValue("")
@@ -134,10 +136,3 @@ class learnCharacter(QWidget):
         self.answer.enterPressed.disconnect()
         self.button.clicked.connect(self.testValidity)
         self.answer.enterPressed.connect(self.testValidity)
-
-                 
-              
-
-
-
-

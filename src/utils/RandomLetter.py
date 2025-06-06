@@ -9,12 +9,13 @@ Description: This is the random function used to learn morse
 
 import random
 import string
+from src.page.Dictionnary import fromMorse
 
-weights = {l: 1.0 for l in string.ascii_uppercase}
+letterWeights = {l: 1.0 for l in string.ascii_uppercase}
 
-compteur = {l: 0 for l in string.ascii_uppercase}
+letterCpt = {l: 0 for l in string.ascii_uppercase}
 
-conditions = {
+letters = {
     'Z': {'Q': 2, 'Y': 2},
     'Q': {'C': 2, 'J': 2},
     'Y': {'C': 2, 'J': 2},
@@ -75,9 +76,40 @@ def mise_a_jour_weights(weights, lettre_tirée, taux_diminution=0.1):
 
 def getRandomLetter():
 
-    l = tirage_pondéré(weights, compteur, conditions)
-    compteur[l] += 1
-    mise_a_jour_weights(weights, l)
+    l = tirage_pondéré(letterWeights, letterCpt, letters)
+    letterCpt[l] += 1
+    mise_a_jour_weights(letterWeights, l)
 
     return l
 
+morse = [
+    ".-",
+    "-...",
+    "-.-.",
+    "-..",
+    ".",
+    "..-.",
+    "--.",
+    "....",
+    "..",
+    ".---",
+    "-.-",
+    ".-..",
+    "--",
+    "-.",
+    "---",
+    ".--.",
+    "--.-",
+    ".-.",
+    "...",
+    "-",
+    "..-",
+    "...-",
+    ".--",
+    "-..-",
+    "-.--",
+    "--.."
+]
+
+def getRandomMorse():
+    return random.choice(morse)

@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import QApplication, QGridLayout, QWidget
 from src.Window import Window
 from src.page.Learn import learnCharacter
 from src.page.Translate import Translate
+from src.utils.RandomLetter import getRandomLetter, getRandomMorse
 from src.Header import Header
 
 def Menu():
@@ -27,7 +28,7 @@ def Menu():
 
     header = Header()
 
-    main = learnCharacter()
+    main = learnCharacter(getRandomMorse)
 
     layout.addWidget(header, 0, 0)
     layout.addWidget(main, 1, 0)
