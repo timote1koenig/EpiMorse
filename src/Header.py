@@ -25,7 +25,7 @@ class Header(QWidget):
         coloredArea.setLayout(content)
 
 
-        titleSection = Title("EpiMorse", "White")
+        titleSection = Title("EpiMorse", "White", 50)
         content.addLayout(titleSection)
         
 

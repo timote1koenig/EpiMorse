@@ -8,10 +8,12 @@ Description: This is the Form class
 """
 
 from PyQt6.QtWidgets import QTextEdit, QVBoxLayout, QWidget, QSizePolicy
-from PyQt6.QtGui import QTextCursor
+from PyQt6.QtCore import Qt, pyqtSignal
 
 
 class Form(QWidget):
+    enterPressed = pyqtSignal()
+
     def __init__(self):
         super().__init__()
 
@@ -25,10 +27,17 @@ class Form(QWidget):
 
         self.setLayout(layout)
 
+        self.edit.installEventFilter(self)
+
     def getValue(self):
         return self.edit.toPlainText()
 
     def setValue(self, value):
         self.edit.setText(value)
 
-
+    def eventFilter(self, source, event):
+        if source == self.edit and event.type() == event.Type.KeyPress:
+            if event.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter):
+                self.enterPressed.emit()
+                return True
+        return super().eventFilter(source, event)

@@ -11,13 +11,16 @@ from PyQt6.QtWidgets import QLabel, QHBoxLayout
 
 
 class Title(QHBoxLayout):
-    def __init__(self, text, color = "Black"):
+    def __init__(self, text, color = "Black", size = 14):
         super().__init__()
 
-        title = QLabel(text)
+        self.title = QLabel(text)
 
-        title.setStyleSheet(f"color: {color};")
+        self.title.setStyleSheet(f"color: {color}; font-size: {size}px;")
         
         self.addStretch()
-        self.addWidget(title)
+        self.addWidget(self.title)
         self.addStretch()
+    
+    def update(self, text):
+        self.title.setText(text)

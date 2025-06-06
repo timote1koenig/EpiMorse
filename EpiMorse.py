@@ -10,7 +10,7 @@ Description: This is the main who managed EpiMorse
 import sys
 from PyQt6.QtWidgets import QApplication, QGridLayout, QWidget
 from src.Window import Window
-from src.page.MainMenu import MainMenu
+from src.page.Learn import learnCharacter
 from src.page.Translate import Translate
 from src.Header import Header
 
@@ -27,12 +27,13 @@ def Menu():
 
     header = Header()
 
-    main = Translate()
+    main = learnCharacter()
 
-    layout.addWidget(header, 0, 0, 1, 2)
+    layout.addWidget(header, 0, 0)
     layout.addWidget(main, 1, 0)
 
-    layout.setRowStretch(1, 1)
+    layout.setRowStretch(0, 3)
+    layout.setRowStretch(1, 20)
 
     layout.setContentsMargins(0, 0, 0, 0)
 

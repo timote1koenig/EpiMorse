@@ -73,11 +73,11 @@ def mise_a_jour_weights(weights, lettre_tirée, taux_diminution=0.1):
         if l != lettre_tirée:
             weights[l] += gain_par_autre
 
-tirages = []
-for _ in range(1000):
+def getRandomLetter():
+
     l = tirage_pondéré(weights, compteur, conditions)
-    tirages.append(l)
     compteur[l] += 1
     mise_a_jour_weights(weights, l)
 
-print("".join(tirages))
+    return l
+
