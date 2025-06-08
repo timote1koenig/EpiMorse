@@ -32,20 +32,28 @@ class Header(QWidget):
         navigation = QHBoxLayout()
         content.addLayout(navigation)
 
-        button1 = QPushButton("Traduction")
-        button2 = QPushButton("Apprendre")
-        button3 = QPushButton("Dictionnaire")
+        self.button1 = QPushButton("Traduction")
+        self.button2 = QPushButton("Apprendre")
+        self.button3 = QPushButton("Dictionnaire")
 
-        button1.setStyleSheet("background-color: PowderBlue")
-        button2.setStyleSheet("background-color: PowderBlue")
-        button3.setStyleSheet("background-color: PowderBlue")
+        self.button1.setStyleSheet("background-color: PowderBlue")
+        self.button2.setStyleSheet("background-color: PowderBlue")
+        self.button3.setStyleSheet("background-color: PowderBlue")
 
-        navigation.addWidget(button1)
-        navigation.addWidget(button2)
-        navigation.addWidget(button3)
+        navigation.addWidget(self.button1)
+        navigation.addWidget(self.button2)
+        navigation.addWidget(self.button3)
 
 
         coloredArea.setStyleSheet("background-color: DarkBlue;")
 
         wrapper.setContentsMargins(0, 0, 0, 0)
+    
+    def connectButtonOne(self, command):
+        self.button1.clicked.connect(command)
 
+    def connectButtonTwo(self, command):
+        self.button2.clicked.connect(command)
+    
+    def connectButtonThree(self, command):
+        self.button3.clicked.connect(command)

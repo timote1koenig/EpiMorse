@@ -8,12 +8,10 @@ Description: This is the main who managed EpiMorse
 """
 
 import sys
-from PyQt6.QtWidgets import QApplication, QGridLayout, QWidget
+from PyQt6.QtWidgets import QApplication, QGridLayout, QWidget, QStackedWidget
 from src.Window import Window
-from src.page.Learn import learnCharacter
-from src.page.Translate import Translate
-from src.utils.RandomLetter import getRandomLetter, getRandomMorse
 from src.Header import Header
+from src.component.Stack import Stack
 
 def Menu():
     app = QApplication([])
@@ -23,15 +21,20 @@ def Menu():
     content = QWidget()
     window.setCentralWidget(content)
 
+    
     layout = QGridLayout()
     content.setLayout(layout)
 
     header = Header()
 
-    main = learnCharacter(getRandomMorse)
+    stack = Stack()
+    
+    header.connectButtonOne(stack.setTranslate)
+    header.connectButtonTwo(stack.setLearnCharMorse)
+
 
     layout.addWidget(header, 0, 0)
-    layout.addWidget(main, 1, 0)
+    layout.addWidget(stack, 1, 0)
 
     layout.setRowStretch(0, 3)
     layout.setRowStretch(1, 20)
