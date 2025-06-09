@@ -14,11 +14,12 @@ from PyQt6.QtCore import Qt, pyqtSignal
 class Form(QWidget):
     enterPressed = pyqtSignal()
 
-    def __init__(self):
+    def __init__(self, size = 16):
         super().__init__()
 
         self.edit = QTextEdit()
         self.edit.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.edit.setStyleSheet(f"font-size: {size}px")
 
         layout = QVBoxLayout()
         layout.addWidget(self.edit)

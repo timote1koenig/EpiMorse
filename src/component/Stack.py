@@ -24,14 +24,14 @@ class Stack(QStackedWidget):
         self.learnTextLetter = learnText(False) # write letter
         self.translate = Translate()
 
-        self.addWidget(self.learnCharMorse)
-        self.addWidget(self.learnCharLetter)
+#        self.addWidget(self.learnCharMorse)
+#        self.addWidget(self.learnCharLetter)
         self.addWidget(self.learnTextMorse)
         self.addWidget(self.learnTextLetter)
-        self.addWidget(self.translate)
+#        self.addWidget(self.translate)
 
     def setTranslate(self):
-        self.setCurrentWidget(self.translate)
+        self.setCurrentWidget(self.learnTextLetter)
     
     def setLearnCharMorse(self):
-        self.setCurrentWidget(self.learnCharMorse)
+        self.setCurrentWidget(self.learnTextMorse)

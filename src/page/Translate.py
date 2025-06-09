@@ -42,14 +42,14 @@ class Translate(QWidget):
         if self.updating:
             return
         self.updating = True
-        self.destForm.setValue(toLetter(self.srcForm.getValue()))
+        self.destForm.setValue(toMorse(self.srcForm.getValue()))
         self.updating = False
 
     def dest_changed(self):
         if self.updating:
             return
         self.updating = True
-        self.srcForm.setValue(toMorse(self.destForm.getValue()))
+        self.srcForm.setValue(toLetter(self.destForm.getValue()))
         self.updating = False
 
 def is_morse(s):
@@ -57,7 +57,7 @@ def is_morse(s):
     return all(c in allowed for c in s.strip()) and any(c in '.-' for c in s)
 
 
-def toMorse(text):
+def toLetter(text):
     text = text.strip().replace("  ", " / ")
     symbols = text.split()
 
@@ -69,6 +69,6 @@ def toMorse(text):
             result.append(fromMorse.get(symbol, ''))
     return ''.join(result)
 
-def toLetter(text):
+def toMorse(text):
     return ''.join(fromLetter.get(char, '') for char in text)
 
